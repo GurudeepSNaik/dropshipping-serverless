@@ -3,6 +3,7 @@ import { STORES } from '../../constants/stores';
 import { createSalesOrder } from '../../services/sales.service';
 import { formatErrorResponse } from '../../utils/errorResponse';
 import { APIGatewayProxyHandler } from 'aws-lambda';
+import { successResponse } from '../../utils/successResponse';
 
 export const handler: APIGatewayProxyHandler = async (event) => {
   const functionName = 'createSalesOrder';
@@ -34,14 +35,8 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     }
 
     const result = await createSalesOrder({ retailer, seller, ...rest });
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: MESSAGES.SALES_ORDER_CREATED,
-        result,
-      }),
-    };
+    
+    return successResponse(MESSAGES.SALES_ORDER_CREATED, result, functionName, job);
   } catch (error: any) {
     return formatErrorResponse({
       statusCode: 500,

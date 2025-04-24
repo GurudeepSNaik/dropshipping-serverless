@@ -26,6 +26,13 @@ functions:
       - http:
           path: sales/create
           method: post
+  
+  greet:
+    handler: src/handlers/greet.handler
+    events:
+      - http:
+          path: greet
+          method: get
 
 custom:
   esbuild:

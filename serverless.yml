@@ -12,6 +12,9 @@ provider:
     PG_USER: ${env:PG_USER}
     PG_PASSWORD: ${env:PG_PASSWORD}
     PG_DB: ${env:PG_DB}
+    OPENOBSERVE_URL: ${env:OPENOBSERVE_URL}
+    OPENOBSERVE_PASSWORD: ${env:OPENOBSERVE_PASSWORD}
+    OPENOBSERVE_USERNAME: ${env:OPENOBSERVE_USERNAME}
 
 plugins:
   - serverless-esbuild
@@ -22,41 +25,6 @@ functions:
     events:
       - http:
           path: sales/create
-          method: post
-
-  createPurchaseOrder:
-    handler: src/handlers/purchase/createPurchaseOrder.handler
-    events:
-      - http:
-          path: purchase/create
-          method: post
-
-  fulfillOrder:
-    handler: src/handlers/fulfillment/fulfillOrder.handler
-    events:
-      - http:
-          path: fulfill
-          method: post
-
-  sendInvoice:
-    handler: src/handlers/sales/sendInvoice.handler
-    events:
-      - http:
-          path: sales/invoice
-          method: post
-
-  itemReceipt:
-    handler: src/handlers/purchase/itemReceipt.handler
-    events:
-      - http:
-          path: purchase/receipt
-          method: post
-
-  createMemo:
-    handler: src/handlers/memo/createMemo.handler
-    events:
-      - http:
-          path: memo/create
           method: post
 
 custom:
